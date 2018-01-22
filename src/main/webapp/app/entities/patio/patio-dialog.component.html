@@ -1,0 +1,90 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPatioLabel" jhiTranslate="controleEstacionamentoApp.patio.home.createOrEditLabel">Create or edit a Patio</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!patio.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="patio.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.patio.descricao" for="field_descricao">Descricao</label>
+            <input type="text" class="form-control" name="descricao" id="field_descricao"
+                [(ngModel)]="patio.descricao" required minlength="1" maxlength="30"/>
+            <div [hidden]="!(editForm.controls.descricao?.dirty && editForm.controls.descricao?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.descricao?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.descricao?.errors?.minlength" jhiTranslate="entity.validation.minlength" translateValues="{ min: 1 }">
+                   This field is required to be at least 1 characters.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.descricao?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 30 }">
+                   This field cannot be longer than 30 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.patio.qtdVagas" for="field_qtdVagas">Qtd Vagas</label>
+            <input type="number" class="form-control" name="qtdVagas" id="field_qtdVagas"
+                [(ngModel)]="patio.qtdVagas" required min="1" max="1000000"/>
+            <div [hidden]="!(editForm.controls.qtdVagas?.dirty && editForm.controls.qtdVagas?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.qtdVagas?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.qtdVagas?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.qtdVagas?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 1000000 }">
+                    This field cannot be more than 1000000.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.qtdVagas?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.patio.taxaHora" for="field_taxaHora">Taxa Hora</label>
+            <input type="number" class="form-control" name="taxaHora" id="field_taxaHora"
+                [(ngModel)]="patio.taxaHora" required min="1" max="1000000"/>
+            <div [hidden]="!(editForm.controls.taxaHora?.dirty && editForm.controls.taxaHora?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.taxaHora?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.taxaHora?.errors?.min" jhiTranslate="entity.validation.min" translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.taxaHora?.errors?.max" jhiTranslate="entity.validation.max" translateValues="{ max: 1000000 }">
+                    This field cannot be more than 1000000.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.taxaHora?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

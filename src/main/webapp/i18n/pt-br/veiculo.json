@@ -1,0 +1,24 @@
+{
+    "controleEstacionamentoApp": {
+        "veiculo" : {
+            "home": {
+                "title": "Veiculos",
+                "createLabel": "Criar novo Veiculo",
+                "createOrEditLabel": "Criar ou editar Veiculo"
+            },
+            "created": "Um novo Veiculo foi criado com o identificador {{ param }}",
+            "updated": "Um Veiculo foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Veiculo foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Veiculo {{ id }}?"
+            },
+            "detail": {
+                "title": "Veiculo"
+            },
+            "placa": "Placa",
+            "modelo": "Modelo",
+            "cor": "Cor",
+            "cliente": "Cliente"
+        }
+    }
+}

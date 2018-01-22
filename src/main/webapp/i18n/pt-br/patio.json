@@ -1,0 +1,23 @@
+{
+    "controleEstacionamentoApp": {
+        "patio" : {
+            "home": {
+                "title": "Patios",
+                "createLabel": "Criar novo Patio",
+                "createOrEditLabel": "Criar ou editar Patio"
+            },
+            "created": "Um novo Patio foi criado com o identificador {{ param }}",
+            "updated": "Um Patio foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Patio foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Patio {{ id }}?"
+            },
+            "detail": {
+                "title": "Patio"
+            },
+            "descricao": "Descricao",
+            "qtdVagas": "Qtd Vagas",
+            "taxaHora": "Taxa Hora"
+        }
+    }
+}

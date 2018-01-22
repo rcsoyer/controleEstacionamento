@@ -1,0 +1,26 @@
+{
+    "controleEstacionamentoApp": {
+        "estacionamento" : {
+            "home": {
+                "title": "Estacionamentos",
+                "createLabel": "Criar novo Estacionamento",
+                "createOrEditLabel": "Criar ou editar Estacionamento"
+            },
+            "created": "Um novo Estacionamento foi criado com o identificador {{ param }}",
+            "updated": "Um Estacionamento foi atualizado com o identificador {{ param }}",
+            "deleted": "Um Estacionamento foi deletado com o identificador {{ param }}",
+            "delete": {
+                "question": "Tem certeza de que deseja excluir Estacionamento {{ id }}?"
+            },
+            "detail": {
+                "title": "Estacionamento"
+            },
+            "entrada": "Entrada",
+            "saida": "Saida",
+            "vaga": "Vaga",
+            "emUso": "Em Uso",
+            "veiculo": "Veiculo",
+            "patio": "Patio"
+        }
+    }
+}

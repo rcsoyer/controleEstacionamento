@@ -1,0 +1,99 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEstacionamentoLabel" jhiTranslate="controleEstacionamentoApp.estacionamento.home.createOrEditLabel">Create or edit a Estacionamento</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!estacionamento.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id" [(ngModel)]="estacionamento.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.entrada" for="field_entrada">Entrada</label>
+            <div class="d-flex">
+                <input id="field_entrada" type="datetime-local" class="form-control" name="entrada" [(ngModel)]="estacionamento.entrada"
+                    required ng-readonly="estacionamento.id instanceof number"/>
+            </div>
+            <div [hidden]="!(editForm.controls.entrada?.dirty && editForm.controls.entrada?.invalid)">
+                <small class="form-text text-danger" [hidden]="!editForm.controls.entrada?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger" [hidden]="!editForm.controls.entrada?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.saida" for="field_saida">Saida</label>
+            <div class="d-flex">
+                <input id="field_saida" type="datetime-local" class="form-control" name="saida" [(ngModel)]="estacionamento.saida" required/>
+            </div>
+            <div [hidden]="!(editForm.controls.saida?.dirty && editForm.controls.saida?.invalid)">
+                <small class="form-text text-danger" [hidden]="!editForm.controls.saida?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger" [hidden]="!editForm.controls.saida?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.patio" for="field_patio">Patio</label>
+            <select class="form-control" id="field_patio" name="patio" [(ngModel)]="estacionamento.patioId" required>
+                <option *ngIf="!editForm.value.patio" [ngValue]="null" selected></option>
+                <option [ngValue]="patioOption.id" *ngFor="let patioOption of patios; trackBy: trackPatioById">{{patioOption.id}} - {{patioOption.descricao}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.patio?.dirty && editForm.controls.patio?.invalid)">
+            <small class="form-text text-danger" [hidden]="!editForm.controls.patio?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.vaga" for="field_vaga">Vaga</label>
+            <input type="number" class="form-control" name="vaga" id="field_vaga" [(ngModel)]="estacionamento.vaga" required min="1"
+                max="1000000" readonly="estacionamento.vaga != null" />
+            <div [hidden]="!(editForm.controls.vaga?.dirty && editForm.controls.vaga?.invalid)">
+                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.min" jhiTranslate="entity.validation.min"
+                    translateValues="{ min: 1 }">
+                    This field should be at least 1.
+                </small>
+                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.max" jhiTranslate="entity.validation.max"
+                    translateValues="{ max: 1000000 }">
+                    This field cannot be more than 1000000.
+                </small>
+                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.veiculo" for="field_veiculo">Veiculo</label>
+            <select class="form-control" id="field_veiculo" name="veiculo" [(ngModel)]="estacionamento.veiculoId" required>
+                <option *ngIf="!editForm.value.veiculo" [ngValue]="null" selected></option>
+                <option [ngValue]="veiculoOption.id" *ngFor="let veiculoOption of veiculos; trackBy: trackVeiculoById">{{veiculoOption.placa}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.veiculo?.dirty && editForm.controls.veiculo?.invalid)">
+            <small class="form-text text-danger" [hidden]="!editForm.controls.veiculo?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;
+            <span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;
+            <span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
