@@ -44,6 +44,8 @@ export class VeiculoDialogComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        this.placaToUpperCase();
+
         if (this.veiculo.id !== undefined) {
             this.subscribeToSaveResponse(
                 this.veiculoService.update(this.veiculo));
@@ -51,6 +53,10 @@ export class VeiculoDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.veiculoService.create(this.veiculo));
         }
+    }
+
+    private placaToUpperCase() {
+        this.veiculo.placa = this.veiculo.placa.toUpperCase();
     }
 
     private subscribeToSaveResponse(result: Observable<Veiculo>) {

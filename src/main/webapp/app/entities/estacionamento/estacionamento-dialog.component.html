@@ -14,7 +14,7 @@
             <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.entrada" for="field_entrada">Entrada</label>
             <div class="d-flex">
                 <input id="field_entrada" type="datetime-local" class="form-control" name="entrada" [(ngModel)]="estacionamento.entrada"
-                    required ng-readonly="estacionamento.id instanceof number"/>
+                    required/>
             </div>
             <div [hidden]="!(editForm.controls.entrada?.dirty && editForm.controls.entrada?.invalid)">
                 <small class="form-text text-danger" [hidden]="!editForm.controls.entrada?.errors?.required" jhiTranslate="entity.validation.required">
@@ -26,35 +26,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.saida" for="field_saida">Saida</label>
+            <label class="form-control-label" for="field_saida">Sa&iacute;da</label>
             <div class="d-flex">
-                <input id="field_saida" type="datetime-local" class="form-control" name="saida" [(ngModel)]="estacionamento.saida" required/>
+                <input id="field_saida" type="datetime-local" class="form-control" name="saida" [(ngModel)]="estacionamento.saida" />
             </div>
-            <div [hidden]="!(editForm.controls.saida?.dirty && editForm.controls.saida?.invalid)">
-                <small class="form-text text-danger" [hidden]="!editForm.controls.saida?.errors?.required" jhiTranslate="entity.validation.required">
-                    This field is required.
-                </small>
-                <small class="form-text text-danger" [hidden]="!editForm.controls.saida?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                    This field should be a date and time.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.patio" for="field_patio">Patio</label>
-            <select class="form-control" id="field_patio" name="patio" [(ngModel)]="estacionamento.patioId" required>
-                <option *ngIf="!editForm.value.patio" [ngValue]="null" selected></option>
-                <option [ngValue]="patioOption.id" *ngFor="let patioOption of patios; trackBy: trackPatioById">{{patioOption.id}} - {{patioOption.descricao}}</option>
-            </select>
-        </div>
-        <div [hidden]="!(editForm.controls.patio?.dirty && editForm.controls.patio?.invalid)">
-            <small class="form-text text-danger" [hidden]="!editForm.controls.patio?.errors?.required" jhiTranslate="entity.validation.required">
-                This field is required.
-            </small>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.vaga" for="field_vaga">Vaga</label>
             <input type="number" class="form-control" name="vaga" id="field_vaga" [(ngModel)]="estacionamento.vaga" required min="1"
-                max="1000000" readonly="estacionamento.vaga != null" />
+                max="1000000" />
             <div [hidden]="!(editForm.controls.vaga?.dirty && editForm.controls.vaga?.invalid)">
                 <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.required" jhiTranslate="entity.validation.required">
                     This field is required.
@@ -74,7 +54,7 @@
         </div>
 
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.veiculo" for="field_veiculo">Veiculo</label>
+            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.veiculo" for="field_veiculo">Ve&iacute;culo</label>
             <select class="form-control" id="field_veiculo" name="veiculo" [(ngModel)]="estacionamento.veiculoId" required>
                 <option *ngIf="!editForm.value.veiculo" [ngValue]="null" selected></option>
                 <option [ngValue]="veiculoOption.id" *ngFor="let veiculoOption of veiculos; trackBy: trackVeiculoById">{{veiculoOption.placa}}</option>
@@ -82,6 +62,18 @@
         </div>
         <div [hidden]="!(editForm.controls.veiculo?.dirty && editForm.controls.veiculo?.invalid)">
             <small class="form-text text-danger" [hidden]="!editForm.controls.veiculo?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_patio">P&aacute;tio</label>
+            <select class="form-control" id="field_patio" name="patio" [(ngModel)]="estacionamento.patioId" required>
+                <option *ngIf="!editForm.value.patio" [ngValue]="null" selected></option>
+                <option [ngValue]="patioOption.id" *ngFor="let patioOption of patios; trackBy: trackPatioById">{{patioOption.id}} - {{patioOption.descricao}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.patio?.dirty && editForm.controls.patio?.invalid)">
+            <small class="form-text text-danger" [hidden]="!editForm.controls.patio?.errors?.required" jhiTranslate="entity.validation.required">
                 This field is required.
             </small>
         </div>

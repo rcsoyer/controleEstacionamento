@@ -26,7 +26,7 @@
             </column>
 
             <column name="saida" type="timestamp">
-                <constraints nullable="false" />
+                <constraints nullable="true" />
             </column>
 
             <column name="vaga" type="integer">
@@ -35,6 +35,10 @@
 
             <column name="em_uso" type="boolean">
                 <constraints nullable="false" />
+            </column>
+
+            <column name="vlr_pagamento" type="double">
+                <constraints nullable="true" />
             </column>
             <column name="veiculo_id" type="bigint">
                 <constraints unique="true" nullable="false" />

@@ -60,6 +60,9 @@ public class EstacionamentoResourceIntTest {
     private static final Boolean DEFAULT_EM_USO = false;
     private static final Boolean UPDATED_EM_USO = true;
 
+    private static final Double DEFAULT_VLR_PAGAMENTO = 1D;
+    private static final Double UPDATED_VLR_PAGAMENTO = 2D;
+
     @Autowired
     private EstacionamentoRepository estacionamentoRepository;
 
@@ -107,7 +110,8 @@ public class EstacionamentoResourceIntTest {
             .entrada(DEFAULT_ENTRADA)
             .saida(DEFAULT_SAIDA)
             .vaga(DEFAULT_VAGA)
-            .emUso(DEFAULT_EM_USO);
+            .emUso(DEFAULT_EM_USO)
+            .vlrPagamento(DEFAULT_VLR_PAGAMENTO);
         // Add required entity
         Veiculo veiculo = VeiculoResourceIntTest.createEntity(em);
         em.persist(veiculo);
@@ -146,6 +150,7 @@ public class EstacionamentoResourceIntTest {
         assertThat(testEstacionamento.getSaida()).isEqualTo(DEFAULT_SAIDA);
         assertThat(testEstacionamento.getVaga()).isEqualTo(DEFAULT_VAGA);
         assertThat(testEstacionamento.isEmUso()).isEqualTo(DEFAULT_EM_USO);
+        assertThat(testEstacionamento.getVlrPagamento()).isEqualTo(DEFAULT_VLR_PAGAMENTO);
     }
 
     @Test
@@ -174,25 +179,6 @@ public class EstacionamentoResourceIntTest {
         int databaseSizeBeforeTest = estacionamentoRepository.findAll().size();
         // set the field null
         estacionamento.setEntrada(null);
-
-        // Create the Estacionamento, which fails.
-        EstacionamentoDTO estacionamentoDTO = estacionamentoMapper.toDto(estacionamento);
-
-        restEstacionamentoMockMvc.perform(post("/api/estacionamentos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(estacionamentoDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Estacionamento> estacionamentoList = estacionamentoRepository.findAll();
-        assertThat(estacionamentoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkSaidaIsRequired() throws Exception {
-        int databaseSizeBeforeTest = estacionamentoRepository.findAll().size();
-        // set the field null
-        estacionamento.setSaida(null);
 
         // Create the Estacionamento, which fails.
         EstacionamentoDTO estacionamentoDTO = estacionamentoMapper.toDto(estacionamento);
@@ -258,7 +244,8 @@ public class EstacionamentoResourceIntTest {
             .andExpect(jsonPath("$.[*].entrada").value(hasItem(sameInstant(DEFAULT_ENTRADA))))
             .andExpect(jsonPath("$.[*].saida").value(hasItem(sameInstant(DEFAULT_SAIDA))))
             .andExpect(jsonPath("$.[*].vaga").value(hasItem(DEFAULT_VAGA)))
-            .andExpect(jsonPath("$.[*].emUso").value(hasItem(DEFAULT_EM_USO.booleanValue())));
+            .andExpect(jsonPath("$.[*].emUso").value(hasItem(DEFAULT_EM_USO.booleanValue())))
+            .andExpect(jsonPath("$.[*].vlrPagamento").value(hasItem(DEFAULT_VLR_PAGAMENTO.doubleValue())));
     }
 
     @Test
@@ -275,7 +262,8 @@ public class EstacionamentoResourceIntTest {
             .andExpect(jsonPath("$.entrada").value(sameInstant(DEFAULT_ENTRADA)))
             .andExpect(jsonPath("$.saida").value(sameInstant(DEFAULT_SAIDA)))
             .andExpect(jsonPath("$.vaga").value(DEFAULT_VAGA))
-            .andExpect(jsonPath("$.emUso").value(DEFAULT_EM_USO.booleanValue()));
+            .andExpect(jsonPath("$.emUso").value(DEFAULT_EM_USO.booleanValue()))
+            .andExpect(jsonPath("$.vlrPagamento").value(DEFAULT_VLR_PAGAMENTO.doubleValue()));
     }
 
     @Test
@@ -301,7 +289,8 @@ public class EstacionamentoResourceIntTest {
             .entrada(UPDATED_ENTRADA)
             .saida(UPDATED_SAIDA)
             .vaga(UPDATED_VAGA)
-            .emUso(UPDATED_EM_USO);
+            .emUso(UPDATED_EM_USO)
+            .vlrPagamento(UPDATED_VLR_PAGAMENTO);
         EstacionamentoDTO estacionamentoDTO = estacionamentoMapper.toDto(updatedEstacionamento);
 
         restEstacionamentoMockMvc.perform(put("/api/estacionamentos")
@@ -317,6 +306,7 @@ public class EstacionamentoResourceIntTest {
         assertThat(testEstacionamento.getSaida()).isEqualTo(UPDATED_SAIDA);
         assertThat(testEstacionamento.getVaga()).isEqualTo(UPDATED_VAGA);
         assertThat(testEstacionamento.isEmUso()).isEqualTo(UPDATED_EM_USO);
+        assertThat(testEstacionamento.getVlrPagamento()).isEqualTo(UPDATED_VLR_PAGAMENTO);
     }
 
     @Test

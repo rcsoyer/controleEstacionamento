@@ -18,10 +18,12 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="entrada"><span jhiTranslate="controleEstacionamentoApp.estacionamento.entrada">Entrada</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="saida"><span jhiTranslate="controleEstacionamentoApp.estacionamento.saida">Sa&iacute;da</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="saida"><span>Sa&iacute;da</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="vaga"><span jhiTranslate="controleEstacionamentoApp.estacionamento.vaga">Vaga</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="veiculoId"><span jhiTranslate="controleEstacionamentoApp.estacionamento.veiculo">Ve&iacute;culo</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="patioId"><span jhiTranslate="controleEstacionamentoApp.estacionamento.patio">P&aacute;tio</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="emUso"><span jhiTranslate="controleEstacionamentoApp.estacionamento.emUso">Em Uso</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="vlrPagamento"><span>Valor Pagamento</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="veiculoId"><span>Ve&iacute;culo</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="patioId"><span>P&aacute;tio</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
             </thead>
@@ -31,6 +33,8 @@
                 <td>{{estacionamento.entrada | date:'medium'}}</td>
                 <td>{{estacionamento.saida | date:'medium'}}</td>
                 <td>{{estacionamento.vaga}}</td>
+                <td>{{estacionamento.emUso}}</td>
+                <td>{{estacionamento.vlrPagamento}}</td>
                 <td>
                     <div *ngIf="estacionamento.veiculoId">
                         <a [routerLink]="['../veiculo', estacionamento.veiculoId  ]" >{{estacionamento.veiculoId}}</a>
@@ -46,16 +50,7 @@
                         <button type="submit"
                                 [routerLink]="['../estacionamento', estacionamento.id ]"
                                 class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'estacionamento/'+ estacionamento.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            <span class="d-none d-md-inline">Pagar</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'estacionamento/'+ estacionamento.id + '/delete'} }]"

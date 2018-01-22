@@ -29,8 +29,7 @@ public class Estacionamento implements Serializable {
     @Column(name = "entrada", nullable = false)
     private ZonedDateTime entrada;
 
-    @NotNull
-    @Column(name = "saida", nullable = false)
+    @Column(name = "saida")
     private ZonedDateTime saida;
 
     @NotNull
@@ -42,6 +41,9 @@ public class Estacionamento implements Serializable {
     @NotNull
     @Column(name = "em_uso", nullable = false)
     private Boolean emUso;
+
+    @Column(name = "vlr_pagamento")
+    private Double vlrPagamento;
 
     @OneToOne(optional = false)
     @NotNull
@@ -113,6 +115,19 @@ public class Estacionamento implements Serializable {
         this.emUso = emUso;
     }
 
+    public Double getVlrPagamento() {
+        return vlrPagamento;
+    }
+
+    public Estacionamento vlrPagamento(Double vlrPagamento) {
+        this.vlrPagamento = vlrPagamento;
+        return this;
+    }
+
+    public void setVlrPagamento(Double vlrPagamento) {
+        this.vlrPagamento = vlrPagamento;
+    }
+
     public Veiculo getVeiculo() {
         return veiculo;
     }
@@ -168,6 +183,7 @@ public class Estacionamento implements Serializable {
             ", saida='" + getSaida() + "'" +
             ", vaga=" + getVaga() +
             ", emUso='" + isEmUso() + "'" +
+            ", vlrPagamento=" + getVlrPagamento() +
             "}";
     }
 }

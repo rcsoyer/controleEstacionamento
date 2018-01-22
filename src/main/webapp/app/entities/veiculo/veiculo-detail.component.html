@@ -1,22 +1,37 @@
-
 <div *ngIf="veiculo">
-    <h2><span jhiTranslate="controleEstacionamentoApp.veiculo.detail.title">Veiculo</span> {{veiculo.id}}</h2>
+    <h2>
+        <span>Ve&iacute;culo</span>
+    </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="controleEstacionamentoApp.veiculo.placa">Placa</span></dt>
+        <dt>
+            <span>C&oacute;digo</span>
+        </dt>
+        <dd>
+            <span>{{veiculo.id}}</span>
+        </dd>
+        <dt>
+            <span jhiTranslate="controleEstacionamentoApp.veiculo.placa">Placa</span>
+        </dt>
         <dd>
             <span>{{veiculo.placa}}</span>
         </dd>
-        <dt><span jhiTranslate="controleEstacionamentoApp.veiculo.modelo">Modelo</span></dt>
+        <dt>
+            <span jhiTranslate="controleEstacionamentoApp.veiculo.modelo">Modelo</span>
+        </dt>
         <dd>
             <span>{{veiculo.modelo}}</span>
         </dd>
-        <dt><span jhiTranslate="controleEstacionamentoApp.veiculo.cor">Cor</span></dt>
+        <dt>
+            <span jhiTranslate="controleEstacionamentoApp.veiculo.cor">Cor</span>
+        </dt>
         <dd>
             <span>{{veiculo.cor}}</span>
         </dd>
-        <dt><span jhiTranslate="controleEstacionamentoApp.veiculo.cliente">Cliente</span></dt>
+        <dt>
+            <span jhiTranslate="controleEstacionamentoApp.veiculo.cliente">Cliente</span>
+        </dt>
         <dd>
             <div *ngIf="veiculo.clienteId">
                 <a [routerLink]="['/cliente', veiculo.clienteId]">{{veiculo.clienteId}}</a>
@@ -24,17 +39,14 @@
         </dd>
     </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    <button type="submit" (click)="previousState()" class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;
+        <span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'veiculo/'+ veiculo.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    <button type="button" [routerLink]="['/', { outlets: { popup: 'veiculo/'+ veiculo.id + '/edit'} }]" replaceUrl="true" queryParamsHandling="merge"
+        class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;
+        <span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

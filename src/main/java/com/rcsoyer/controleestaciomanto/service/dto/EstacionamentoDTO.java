@@ -18,7 +18,6 @@ public class EstacionamentoDTO implements Serializable {
     @NotNull
     private ZonedDateTime entrada;
 
-    @NotNull
     private ZonedDateTime saida;
 
     @NotNull
@@ -28,6 +27,8 @@ public class EstacionamentoDTO implements Serializable {
 
     @NotNull
     private Boolean emUso;
+
+    private Double vlrPagamento;
 
     private Long veiculoId;
 
@@ -71,6 +72,14 @@ public class EstacionamentoDTO implements Serializable {
 
     public void setEmUso(Boolean emUso) {
         this.emUso = emUso;
+    }
+
+    public Double getVlrPagamento() {
+        return vlrPagamento;
+    }
+
+    public void setVlrPagamento(Double vlrPagamento) {
+        this.vlrPagamento = vlrPagamento;
     }
 
     public Long getVeiculoId() {
@@ -118,6 +127,7 @@ public class EstacionamentoDTO implements Serializable {
             ", saida='" + getSaida() + "'" +
             ", vaga=" + getVaga() +
             ", emUso='" + isEmUso() + "'" +
+            ", vlrPagamento=" + getVlrPagamento() +
             "}";
     }
 }

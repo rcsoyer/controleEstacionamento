@@ -48,6 +48,8 @@ describe('Estacionamento e2e test', () => {
                 expect(estacionamentoDialogPage.getEmUsoInput().isSelected()).toBeTruthy();
             }
         });
+        estacionamentoDialogPage.setVlrPagamentoInput('5');
+        expect(estacionamentoDialogPage.getVlrPagamentoInput()).toMatch('5');
         estacionamentoDialogPage.veiculoSelectLastOption();
         estacionamentoDialogPage.patioSelectLastOption();
         estacionamentoDialogPage.save();
@@ -80,6 +82,7 @@ export class EstacionamentoDialogPage {
     saidaInput = element(by.css('input#field_saida'));
     vagaInput = element(by.css('input#field_vaga'));
     emUsoInput = element(by.css('input#field_emUso'));
+    vlrPagamentoInput = element(by.css('input#field_vlrPagamento'));
     veiculoSelect = element(by.css('select#field_veiculo'));
     patioSelect = element(by.css('select#field_patio'));
 
@@ -114,6 +117,14 @@ export class EstacionamentoDialogPage {
     getEmUsoInput = function() {
         return this.emUsoInput;
     }
+    setVlrPagamentoInput = function(vlrPagamento) {
+        this.vlrPagamentoInput.sendKeys(vlrPagamento);
+    }
+
+    getVlrPagamentoInput = function() {
+        return this.vlrPagamentoInput.getAttribute('value');
+    }
+
     veiculoSelectLastOption = function() {
         this.veiculoSelect.all(by.tagName('option')).last().click();
     }

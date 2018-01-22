@@ -68,7 +68,7 @@ class EstacionamentoGatlingTest extends Simulation {
             .exec(http("Create new estacionamento")
             .post("/api/estacionamentos")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "entrada":"2020-01-01T00:00:00.000Z", "saida":"2020-01-01T00:00:00.000Z", "vaga":"0", "emUso":null}""")).asJSON
+            .body(StringBody("""{"id":null, "entrada":"2020-01-01T00:00:00.000Z", "saida":"2020-01-01T00:00:00.000Z", "vaga":"0", "emUso":null, "vlrPagamento":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_estacionamento_url"))).exitHereIfFailed
             .pause(10)

@@ -28,10 +28,7 @@
         },
         {
             "fieldName": "saida",
-            "fieldType": "ZonedDateTime",
-            "fieldValidateRules": [
-                "required"
-            ]
+            "fieldType": "ZonedDateTime"
         },
         {
             "fieldName": "vaga",
@@ -50,6 +47,10 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "vlrPagamento",
+            "fieldType": "Double"
         }
     ],
     "changelogDate": "20180122091340",

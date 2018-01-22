@@ -11,7 +11,7 @@
             <span>{{estacionamento.entrada | date:'medium'}}</span>
         </dd>
         <dt>
-            <span jhiTranslate="controleEstacionamentoApp.estacionamento.saida">Sa&iacute;da</span>
+            <span>Sa&iacute;da</span>
         </dt>
         <dd>
             <span>{{estacionamento.saida | date:'medium'}}</span>
@@ -23,7 +23,19 @@
             <span>{{estacionamento.vaga}}</span>
         </dd>
         <dt>
-            <span jhiTranslate="controleEstacionamentoApp.estacionamento.veiculo">Veiculo</span>
+            <span jhiTranslate="controleEstacionamentoApp.estacionamento.emUso">Em Uso</span>
+        </dt>
+        <dd>
+            <span>{{estacionamento.emUso}}</span>
+        </dd>
+        <dt>
+            <span>Valor Pagamento</span>
+        </dt>
+        <dd>
+            <span>{{estacionamento.vlrPagamento}}</span>
+        </dd>
+        <dt>
+            <span>Ve&iacute;culo</span>
         </dt>
         <dd>
             <div *ngIf="estacionamento.veiculoId">

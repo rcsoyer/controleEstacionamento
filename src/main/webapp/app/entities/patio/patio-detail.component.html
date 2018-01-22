@@ -1,34 +1,44 @@
-
 <div *ngIf="patio">
-    <h2><span jhiTranslate="controleEstacionamentoApp.patio.detail.title">Patio</span> {{patio.id}}</h2>
+    <h2>
+        <span>P&aacute;tio</span>
+    </h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="controleEstacionamentoApp.patio.descricao">Descricao</span></dt>
+        <dt>
+            <span>C&oacute;digo</span>
+        </dt>
+        <dd>
+            <span>{{patio.id}}</span>
+        </dd>
+        <dt>
+            <span>Descri&ccedil;&atilde;o</span>
+        </dt>
         <dd>
             <span>{{patio.descricao}}</span>
         </dd>
-        <dt><span jhiTranslate="controleEstacionamentoApp.patio.qtdVagas">Qtd Vagas</span></dt>
+        <dt>
+            <span>Quantidade de Vagas</span>
+        </dt>
         <dd>
             <span>{{patio.qtdVagas}}</span>
         </dd>
-        <dt><span jhiTranslate="controleEstacionamentoApp.patio.taxaHora">Taxa Hora</span></dt>
+        <dt>
+            <span>Taxa/Hora</span>
+        </dt>
         <dd>
             <span>{{patio.taxaHora}}</span>
         </dd>
     </dl>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    <button type="submit" (click)="previousState()" class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;
+        <span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'patio/'+ patio.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    <button type="button" [routerLink]="['/', { outlets: { popup: 'patio/'+ patio.id + '/edit'} }]" replaceUrl="true" queryParamsHandling="merge"
+        class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;
+        <span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

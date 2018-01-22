@@ -7,9 +7,10 @@ export class Estacionamento implements BaseEntity {
         public saida?: any,
         public vaga?: number,
         public emUso?: boolean,
+        public vlrPagamento?: number,
         public veiculoId?: number,
         public patioId?: number,
     ) {
-        this.emUso = false;
+        this.emUso = true;
     }
 }
