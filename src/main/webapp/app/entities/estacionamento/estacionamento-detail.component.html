@@ -1,6 +1,6 @@
 <div *ngIf="estacionamento">
     <h2>
-        <span jhiTranslate="controleEstacionamentoApp.estacionamento.detail.title">Estacionamento</span> {{estacionamento.id}}</h2>
+        <span jhiTranslate="controleEstacionamentoApp.estacionamento.detail.title">Estacionamento</span></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
@@ -59,7 +59,7 @@
 
     <button type="button" [routerLink]="['/', { outlets: { popup: 'estacionamento/'+ estacionamento.id + '/edit'} }]" replaceUrl="true"
         queryParamsHandling="merge" class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;
-        <span jhiTranslate="entity.action.edit"> Edit</span>
+        <span class="fa fa-credit-card"></span>&nbsp;
+        <span> Pagar</span>
     </button>
 </div>
