@@ -45,6 +45,11 @@ public class CacheConfiguration {
             cm.createCache(com.rcsoyer.controleestaciomanto.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.rcsoyer.controleestaciomanto.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.rcsoyer.controleestaciomanto.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.rcsoyer.controleestaciomanto.domain.Cliente.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rcsoyer.controleestaciomanto.domain.Cliente.class.getName() + ".veiculos", jcacheConfiguration);
+            cm.createCache(com.rcsoyer.controleestaciomanto.domain.Veiculo.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rcsoyer.controleestaciomanto.domain.Patio.class.getName(), jcacheConfiguration);
+            cm.createCache(com.rcsoyer.controleestaciomanto.domain.Estacionamento.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
