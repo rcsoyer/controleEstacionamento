@@ -41,4 +41,6 @@ public interface EstacionamentoService {
   void delete(Long id);
 
   EstacionamentoDTO getPgCalculado(Long id);
+
+  void pagarEstacionamento(EstacionamentoDTO dto);
 }

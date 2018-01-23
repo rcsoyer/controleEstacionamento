@@ -2,7 +2,6 @@ package com.rcsoyer.controleestaciomanto.service.impl;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import org.slf4j.Logger;
@@ -33,14 +32,14 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
 
   private final EstacionamentoMapper mapper;
 
-  private final EstacionamentoRepository estacionamentoRepository;
+  private final EstacionamentoRepository repository;
 
 
   public EstacionamentoServiceImpl(EstacionamentoRepository estacionamentoRepository,
       EstacionamentoMapper estacionamentoMapper, PatioService patioService) {
     this.patioService = patioService;
     this.mapper = estacionamentoMapper;
-    this.estacionamentoRepository = estacionamentoRepository;
+    this.repository = estacionamentoRepository;
   }
 
   /**
@@ -53,7 +52,7 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
   public EstacionamentoDTO save(EstacionamentoDTO estacionamentoDTO) {
     log.debug("Request to save Estacionamento : {}", estacionamentoDTO);
     Estacionamento estacionamento = mapper.toEntity(estacionamentoDTO);
-    estacionamento = estacionamentoRepository.save(estacionamento);
+    estacionamento = repository.save(estacionamento);
     return mapper.toDto(estacionamento);
   }
 
@@ -67,7 +66,7 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
   @Transactional(readOnly = true)
   public Page<EstacionamentoDTO> findAll(Pageable pageable) {
     log.debug("Request to get all Estacionamentos");
-    return estacionamentoRepository.findAll(pageable).map(mapper::toDto);
+    return repository.findAll(pageable).map(mapper::toDto);
   }
 
   /**
@@ -85,7 +84,7 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
   }
 
   private Estacionamento consultar(Long id) {
-    return estacionamentoRepository.findOne(id);
+    return repository.findOne(id);
   }
 
   /**
@@ -96,20 +95,16 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
   @Override
   public void delete(Long id) {
     log.debug("Request to delete Estacionamento : {}", id);
-    estacionamentoRepository.delete(id);
+    repository.delete(id);
   }
 
   @Override
   public EstacionamentoDTO getPgCalculado(Long id) {
-    return Optional.of(consultar(id))
-                   .map(calcular())
-                   .get();
-  }
-
-  private Function<Estacionamento, EstacionamentoDTO> calcular() {
-    Function<Estacionamento, EstacionamentoDTO> toDto = mapper::toDto;
-    return toDto.andThen(calcularHoras())
-                .andThen(calcularPagamento());
+    Function<Long, Estacionamento> consultar = this::consultar;
+    return consultar.andThen(mapper::toDto)
+                    .andThen(calcularHoras())
+                    .andThen(calcularPagamento())
+                    .apply(id);
   }
 
   private UnaryOperator<EstacionamentoDTO> calcularHoras() {
@@ -125,11 +120,18 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
 
   private UnaryOperator<EstacionamentoDTO> calcularPagamento() {
     return dto -> {
-      long horasEstacionado = dto.getTempoPermanencia();
+      long tempoPermanencia = dto.getTempoPermanencia();
       PatioDTO patio = patioService.findOne(dto.getPatioId());
-      double vlrPagamento = horasEstacionado * patio.getTaxaHora();
+      double vlrPagamento = tempoPermanencia * patio.getTaxaHora();
       dto.setVlrPagamento(vlrPagamento);
       return dto;
     };
+  }
+
+  @Override
+  public void pagarEstacionamento(final EstacionamentoDTO dto) {
+    Estacionamento entitade = mapper.toEntity(dto);
+    entitade.setEmUso(Boolean.FALSE);
+    repository.save(entitade);
   }
 }

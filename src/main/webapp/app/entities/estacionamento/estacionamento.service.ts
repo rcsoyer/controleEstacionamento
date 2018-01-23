@@ -56,12 +56,9 @@ export class EstacionamentoService {
             });
     }
 
-    pagar(estacionamento: Estacionamento) {
+    pagar(estacionamento: Estacionamento): Observable<Response> {
         const copy = this.convert(estacionamento);
-        return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-            const jsonResponse = res.json();
-            return this.convertItemFromServer(jsonResponse);
-        });
+        return this.http.put(this.resourceUrl + '/pagar', copy);
     }
 
     private convertResponse(res: Response): ResponseWrapper {
