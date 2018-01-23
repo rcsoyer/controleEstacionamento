@@ -28,6 +28,14 @@
                         <span>Quantidade de Vagas</span>
                         <span class="fa fa-sort"></span>
                     </th>
+                    <th jhiSortBy="vagasDisponiveis">
+                        <span>Vagas dispon&iacute;veis</span>
+                        <span class="fa fa-sort"></span>
+                    </th>
+                    <th jhiSortBy="vagasOcupadas">
+                        <span>Vagas ocupadas</span>
+                        <span class="fa fa-sort"></span>
+                    </th>
                     <th jhiSortBy="taxaHora">
                         <span>Taxa/Hora</span>
                         <span class="fa fa-sort"></span>
@@ -42,6 +50,8 @@
                     </td>
                     <td>{{patio.descricao}}</td>
                     <td>{{patio.qtdVagas}}</td>
+                    <td>{{patio.taxaHora}}</td>
+                    <td>{{patio.taxaHora}}</td>
                     <td>{{patio.taxaHora}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

@@ -17,7 +17,9 @@
             },
             "descricao": "Descricao",
             "qtdVagas": "Qtd Vagas",
-            "taxaHora": "Taxa Hora"
+            "taxaHora": "Taxa Hora",
+            "vagasDisponiveis" : "Vagas Disponiveis",
+            "vagasOcupadas" : "Vagas Ocupadas"
         }
     }
 }

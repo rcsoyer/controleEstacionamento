@@ -6,6 +6,8 @@ export class Patio implements BaseEntity {
         public descricao?: string,
         public qtdVagas?: number,
         public taxaHora?: number,
+        vagasDisponiveis?: number,
+        vagasOcupadas?: number
     ) {
     }
 }
