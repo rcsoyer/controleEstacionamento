@@ -31,7 +31,7 @@ export class EstacionamentoDetailComponent implements OnInit, OnDestroy {
     }
 
     load(id) {
-        this.estacionamentoService.find(id).subscribe((estacionamento) => {
+        this.estacionamentoService.getPgCalculado(id).subscribe((estacionamento) => {
             this.estacionamento = estacionamento;
         });
     }
@@ -49,5 +49,9 @@ export class EstacionamentoDetailComponent implements OnInit, OnDestroy {
             'estacionamentoListModification',
             (response) => this.load(this.estacionamento.id)
         );
+    }
+
+    pagar() {
+        this.estacionamentoService.pagar(this.estacionamento);
     }
 }

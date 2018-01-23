@@ -10,7 +10,7 @@ export class Estacionamento implements BaseEntity {
         public vlrPagamento?: number,
         public veiculoId?: number,
         public patioId?: number,
+        public tempoPermanencia?: number
     ) {
-        this.emUso = true;
     }
 }

@@ -56,6 +56,14 @@ export class EstacionamentoService {
             });
     }
 
+    pagar(estacionamento: Estacionamento) {
+        const copy = this.convert(estacionamento);
+        return this.http.put(this.resourceUrl, copy).map((res: Response) => {
+            const jsonResponse = res.json();
+            return this.convertItemFromServer(jsonResponse);
+        });
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];

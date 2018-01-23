@@ -21,7 +21,8 @@
             "emUso": "Em Uso",
             "vlrPagamento": "Vlr Pagamento",
             "veiculo": "Veiculo",
-            "patio": "Patio"
+            "patio": "Patio",
+            "tempoPermanencia" : "Tempo de Permanencia"
         }
     }
 }

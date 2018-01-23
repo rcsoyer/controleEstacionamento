@@ -24,16 +24,16 @@
             <span>{{estacionamento.vaga}}</span>
         </dd>
         <dt>
-            <span jhiTranslate="controleEstacionamentoApp.estacionamento.emUso">Em Uso</span>
-        </dt>
-        <dd>
-            <span>{{estacionamento.emUso}}</span>
-        </dd>
-        <dt>
             <span>Valor Pagamento</span>
         </dt>
         <dd>
-            <span>{{estacionamento.vlrPagamento}}</span>
+            <span>R$ {{estacionamento.vlrPagamento}}</span>
+        </dd>
+        <dt>
+            <span>Tempo de Perman&ecirc;ncia</span>
+        </dt>
+        <dd>
+            <span>{{estacionamento.tempoPermanencia}} horas</span>
         </dd>
         <dt>
             <span>Ve&iacute;culo</span>
@@ -58,7 +58,7 @@
         <span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" (click)="pagar()">
         <span class="fa fa-credit-card"></span>&nbsp;
         <span> Pagar</span>
     </button>
