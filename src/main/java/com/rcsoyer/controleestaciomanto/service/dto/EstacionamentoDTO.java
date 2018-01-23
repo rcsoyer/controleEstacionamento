@@ -1,133 +1,140 @@
 package com.rcsoyer.controleestaciomanto.service.dto;
 
 
-import java.time.ZonedDateTime;
-import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.ZonedDateTime;
 import java.util.Objects;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 /**
  * A DTO for the Estacionamento entity.
  */
 public class EstacionamentoDTO implements Serializable {
 
-    private Long id;
+  private static final long serialVersionUID = -7083151610414861742L;
 
-    @NotNull
-    private ZonedDateTime entrada;
+  private Long id;
 
-    private ZonedDateTime saida;
+  @NotNull
+  private ZonedDateTime entrada;
 
-    @NotNull
-    @Min(value = 1)
-    @Max(value = 1000000)
-    private Integer vaga;
+  private ZonedDateTime saida;
 
-    @NotNull
-    private Boolean emUso;
+  @NotNull
+  @Min(value = 1)
+  @Max(value = 1000000)
+  private Integer vaga;
 
-    private Double vlrPagamento;
+  @NotNull
+  private Boolean emUso;
 
-    private Long veiculoId;
+  private Double vlrPagamento;
 
-    private Long patioId;
+  private Long veiculoId;
 
-    public Long getId() {
-        return id;
+  private Long patioId;
+
+  private Long tempoPermanencia;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public ZonedDateTime getEntrada() {
+    return entrada;
+  }
+
+  public void setEntrada(ZonedDateTime entrada) {
+    this.entrada = entrada;
+  }
+
+  public ZonedDateTime getSaida() {
+    return saida;
+  }
+
+  public void setSaida(ZonedDateTime saida) {
+    this.saida = saida;
+  }
+
+  public Integer getVaga() {
+    return vaga;
+  }
+
+  public void setVaga(Integer vaga) {
+    this.vaga = vaga;
+  }
+
+  public Boolean isEmUso() {
+    return emUso;
+  }
+
+  public void setEmUso(Boolean emUso) {
+    this.emUso = emUso;
+  }
+
+  public Double getVlrPagamento() {
+    return vlrPagamento;
+  }
+
+  public void setVlrPagamento(Double vlrPagamento) {
+    this.vlrPagamento = vlrPagamento;
+  }
+
+  public Long getVeiculoId() {
+    return veiculoId;
+  }
+
+  public void setVeiculoId(Long veiculoId) {
+    this.veiculoId = veiculoId;
+  }
+
+  public Long getPatioId() {
+    return patioId;
+  }
+
+  public void setPatioId(Long patioId) {
+    this.patioId = patioId;
+  }
+
+  public Long getTempoPermanencia() {
+    return tempoPermanencia;
+  }
+
+  public void setTempoPermanencia(Long tempoPermanencia) {
+    this.tempoPermanencia = tempoPermanencia;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    EstacionamentoDTO estacionamentoDTO = (EstacionamentoDTO) o;
+    if (estacionamentoDTO.getId() == null || getId() == null) {
+      return false;
     }
+    return Objects.equals(getId(), estacionamentoDTO.getId());
+  }
 
-    public ZonedDateTime getEntrada() {
-        return entrada;
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hashCode(getId());
+  }
 
-    public void setEntrada(ZonedDateTime entrada) {
-        this.entrada = entrada;
-    }
-
-    public ZonedDateTime getSaida() {
-        return saida;
-    }
-
-    public void setSaida(ZonedDateTime saida) {
-        this.saida = saida;
-    }
-
-    public Integer getVaga() {
-        return vaga;
-    }
-
-    public void setVaga(Integer vaga) {
-        this.vaga = vaga;
-    }
-
-    public Boolean isEmUso() {
-        return emUso;
-    }
-
-    public void setEmUso(Boolean emUso) {
-        this.emUso = emUso;
-    }
-
-    public Double getVlrPagamento() {
-        return vlrPagamento;
-    }
-
-    public void setVlrPagamento(Double vlrPagamento) {
-        this.vlrPagamento = vlrPagamento;
-    }
-
-    public Long getVeiculoId() {
-        return veiculoId;
-    }
-
-    public void setVeiculoId(Long veiculoId) {
-        this.veiculoId = veiculoId;
-    }
-
-    public Long getPatioId() {
-        return patioId;
-    }
-
-    public void setPatioId(Long patioId) {
-        this.patioId = patioId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        EstacionamentoDTO estacionamentoDTO = (EstacionamentoDTO) o;
-        if(estacionamentoDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), estacionamentoDTO.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "EstacionamentoDTO{" +
-            "id=" + getId() +
-            ", entrada='" + getEntrada() + "'" +
-            ", saida='" + getSaida() + "'" +
-            ", vaga=" + getVaga() +
-            ", emUso='" + isEmUso() + "'" +
-            ", vlrPagamento=" + getVlrPagamento() +
-            "}";
-    }
+  @Override
+  public String toString() {
+    return "EstacionamentoDTO{" + "id=" + getId() + ", entrada='" + getEntrada() + "'" + ", saida='"
+        + getSaida() + "'" + ", vaga=" + getVaga() + ", emUso='" + isEmUso() + "'"
+        + ", vlrPagamento=" + getVlrPagamento() + "}";
+  }
 }

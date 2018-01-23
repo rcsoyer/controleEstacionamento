@@ -11,7 +11,7 @@ import { ResponseWrapper, createRequestOption } from '../../shared';
 @Injectable()
 export class EstacionamentoService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/estacionamentos';
+    private resourceUrl = SERVER_API_URL + 'api/estacionamentos';
 
     constructor(private http: Http, private dateUtils: JhiDateUtils) { }
 
@@ -46,6 +46,14 @@ export class EstacionamentoService {
 
     delete(id: number): Observable<Response> {
         return this.http.delete(`${this.resourceUrl}/${id}`);
+    }
+
+    getPgCalculado(id: number): Observable<Estacionamento> {
+        return this.http.get(`${this.resourceUrl}/getPgCalculado/${id}`)
+            .map((res: Response) => {
+                const jsonResponse = res.json();
+                return this.convertItemFromServer(jsonResponse);
+            });
     }
 
     private convertResponse(res: Response): ResponseWrapper {

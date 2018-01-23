@@ -1,5 +1,10 @@
 package com.rcsoyer.controleestaciomanto.service.impl;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,6 +16,7 @@ import com.rcsoyer.controleestaciomanto.repository.EstacionamentoRepository;
 import com.rcsoyer.controleestaciomanto.service.EstacionamentoService;
 import com.rcsoyer.controleestaciomanto.service.PatioService;
 import com.rcsoyer.controleestaciomanto.service.dto.EstacionamentoDTO;
+import com.rcsoyer.controleestaciomanto.service.dto.PatioDTO;
 import com.rcsoyer.controleestaciomanto.service.mapper.EstacionamentoMapper;
 
 
@@ -95,24 +101,35 @@ public class EstacionamentoServiceImpl implements EstacionamentoService {
 
   @Override
   public EstacionamentoDTO getPgCalculado(Long id) {
-    return null;
+    return Optional.of(consultar(id))
+                   .map(calcular())
+                   .get();
   }
-  /*
-   * @Override public EstacionamentoDTO getPgCalculado(Long id) { return Optional.of(consultar(id))
-   * .map(calcular()) .get(); }
-   * 
-   * private Function<Estacionamento, EstacionamentoDTO> calcular() { Function<Estacionamento,
-   * EstacionamentoDTO> toDto = mapper::toDto; return toDto.andThen(calcularHoras())
-   * .andThen(calcularPagamento()); }
-   * 
-   * private UnaryOperator<EstacionamentoDTO> calcularHoras() { return dto -> { ZonedDateTime
-   * entrada = dto.getEntrada(); ZonedDateTime saida = ZonedDateTime.now(); long tempoPermanencia =
-   * entrada.until(saida, ChronoUnit.HOURS); dto.setSaida(saida);
-   * dto.setTempoPermanencia(tempoPermanencia); return dto; }; }
-   * 
-   * private UnaryOperator<EstacionamentoDTO> calcularPagamento() { return dto -> { long
-   * horasEstacionado = dto.getTempoPermanencia(); PatioDTO patio =
-   * patioService.findOne(dto.getPatioId()); double vlrPagamento = horasEstacionado *
-   * patio.getTaxaHora(); dto.setVlrPagamento(vlrPagamento); return dto; }; }
-   */
+
+  private Function<Estacionamento, EstacionamentoDTO> calcular() {
+    Function<Estacionamento, EstacionamentoDTO> toDto = mapper::toDto;
+    return toDto.andThen(calcularHoras())
+                .andThen(calcularPagamento());
+  }
+
+  private UnaryOperator<EstacionamentoDTO> calcularHoras() {
+    return dto -> {
+      ZonedDateTime entrada = dto.getEntrada();
+      ZonedDateTime saida = ZonedDateTime.now();
+      long tempoPermanencia = entrada.until(saida, ChronoUnit.HOURS);
+      dto.setSaida(saida);
+      dto.setTempoPermanencia(tempoPermanencia);
+      return dto;
+    };
+  }
+
+  private UnaryOperator<EstacionamentoDTO> calcularPagamento() {
+    return dto -> {
+      long horasEstacionado = dto.getTempoPermanencia();
+      PatioDTO patio = patioService.findOne(dto.getPatioId());
+      double vlrPagamento = horasEstacionado * patio.getTaxaHora();
+      dto.setVlrPagamento(vlrPagamento);
+      return dto;
+    };
+  }
 }
