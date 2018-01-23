@@ -145,4 +145,16 @@ public class EstacionamentoResource {
     EstacionamentoDTO dto = estacionamentoService.getPgCalculado(id);
     return ResponseUtil.wrapOrNotFound(Optional.of(dto));
   }
+
+  @Timed
+  @PutMapping("/estacionamentos/pagar")
+  public ResponseEntity<EstacionamentoDTO> pagarEstacionamento(
+      @Valid @RequestBody EstacionamentoDTO estacionamentoDTO) throws URISyntaxException {
+    log.debug("REST request para pagar Estacionamento : {}", estacionamentoDTO);
+    EstacionamentoDTO result = estacionamentoService.save(estacionamentoDTO);
+    return ResponseEntity.ok()
+        .headers(
+            HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, estacionamentoDTO.getId().toString()))
+        .body(result);
+  }
 }
