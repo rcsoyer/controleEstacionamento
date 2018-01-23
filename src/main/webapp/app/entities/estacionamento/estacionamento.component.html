@@ -28,14 +28,6 @@
                         <span>Sa&iacute;da</span>
                         <span class="fa fa-sort"></span>
                     </th>
-                    <th jhiSortBy="vaga">
-                        <span jhiTranslate="controleEstacionamentoApp.estacionamento.vaga">Vaga</span>
-                        <span class="fa fa-sort"></span>
-                    </th>
-                    <th jhiSortBy="emUso">
-                        <span>Pagamento Realizado</span>
-                        <span class="fa fa-sort"></span>
-                    </th>
                     <th jhiSortBy="vlrPagamento">
                         <span>Valor Pagamento</span>
                         <span class="fa fa-sort"></span>
@@ -58,8 +50,6 @@
                     </td>
                     <td>{{estacionamento.entrada | date:'medium'}}</td>
                     <td>{{estacionamento.saida | date:'medium'}}</td>
-                    <td>{{estacionamento.vaga}}</td>
-                    <td>{{estacionamento.emUso}}</td>
                     <td>{{estacionamento.vlrPagamento}}</td>
                     <td>
                         <div *ngIf="estacionamento.veiculoId">

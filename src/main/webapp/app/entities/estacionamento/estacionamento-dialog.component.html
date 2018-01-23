@@ -31,27 +31,6 @@
                 <input id="field_saida" type="datetime-local" class="form-control" name="saida" [(ngModel)]="estacionamento.saida" />
             </div>
         </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.vaga" for="field_vaga">Vaga</label>
-            <input type="number" class="form-control" name="vaga" id="field_vaga" [(ngModel)]="estacionamento.vaga" required min="1"
-                max="1000000" />
-            <div [hidden]="!(editForm.controls.vaga?.dirty && editForm.controls.vaga?.invalid)">
-                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.required" jhiTranslate="entity.validation.required">
-                    This field is required.
-                </small>
-                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.min" jhiTranslate="entity.validation.min"
-                    translateValues="{ min: 1 }">
-                    This field should be at least 1.
-                </small>
-                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.max" jhiTranslate="entity.validation.max"
-                    translateValues="{ max: 1000000 }">
-                    This field cannot be more than 1000000.
-                </small>
-                <small class="form-text text-danger" [hidden]="!editForm.controls.vaga?.errors?.number" jhiTranslate="entity.validation.number">
-                    This field should be a number.
-                </small>
-            </div>
-        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="controleEstacionamentoApp.estacionamento.veiculo" for="field_veiculo">Ve&iacute;culo</label>
