@@ -57,8 +57,7 @@ export class EstacionamentoService {
     }
 
     pagar(estacionamento: Estacionamento): Observable<Response> {
-        const copy = this.convert(estacionamento);
-        return this.http.put(this.resourceUrl + '/pagar', copy);
+        return this.http.put(this.resourceUrl + '/pagar', estacionamento);
     }
 
     private convertResponse(res: Response): ResponseWrapper {
@@ -87,9 +86,7 @@ export class EstacionamentoService {
      */
     private convert(estacionamento: Estacionamento): Estacionamento {
         const copy: Estacionamento = Object.assign({}, estacionamento);
-
         copy.entrada = this.dateUtils.toDate(estacionamento.entrada);
-
         copy.saida = this.dateUtils.toDate(estacionamento.saida);
         return copy;
     }

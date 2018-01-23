@@ -54,10 +54,9 @@ export class EstacionamentoDetailComponent implements OnInit, OnDestroy {
     pagar() {
         this.estacionamentoService.pagar(this.estacionamento)
             .subscribe((response) => {
-                this.eventManager.broadcast({
-                    name: 'estacionamentoListModification',
-                    content: 'Estacionamento pago, vaga liberada'
-                });
+                if (response.ok) {
+                    this.previousState();
+                }
             });
     }
 }
